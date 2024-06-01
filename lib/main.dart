@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/injection_container.dart';
+import 'package:test_flutter/presentation/pages/home_page.dart';
 
-void main() {
+void main() async {
+  await initializeDependencies();
   runApp(const InternLevVotintsev());
 }
 
@@ -9,12 +12,6 @@ class InternLevVotintsev extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('News screen'),
-        ),
-      ),
-    );
+    return const MaterialApp(home: HomePage());
   }
 }
