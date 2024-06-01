@@ -10,7 +10,6 @@ class InternLevVotintsev extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Меня возьмут, 100% (с) Лев Вотинцев',
       home: Scaffold(
         body: Center(
           child: Text('News screen'),

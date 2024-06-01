@@ -1,6 +1,6 @@
-import 'package:test_flutter/repositories/news/models/article.dart';
+import 'package:test_flutter/data/models/article.dart';
 
-abstract class AbstractNewsRepository {
+abstract class NewsRepository {
   Future<List<Article>> getLatestArticles();
   Future<List<Article>> getFeaturedArticles();
   Future<Article> getArticle(String id);

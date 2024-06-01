@@ -1,35 +1,6 @@
-import 'package:test_flutter/repositories/news/abstract_news_repository.dart';
-import 'package:test_flutter/repositories/news/models/article.dart';
+import 'package:test_flutter/data/models/article.dart';
 
-class MockNewsRepository implements AbstractNewsRepository {
-  @override
-  Future<List<Article>> getLatestArticles() async {
-    return _mockArticles;
-  }
-
-  /// Can throw [StateError]
-  @override
-  Future<Article> getArticle(String id) async {
-    return _mockArticles.firstWhere((e) => e.id == id);
-  }
-
-  @override
-  Future<List<Article>> getFeaturedArticles() async {
-    return _mockArticles;
-  }
-}
-
-final _mockArticles = [
-  Article(
-    id: '1108389a-b3db-11ec-b909-0242ac120002',
-    title: 'We are processing your request...',
-    publicationDate: DateTime.now().subtract(const Duration(days: 1)),
-    imageUrl: 'https://ibb.co/SvH799m',
-    description: '''Please excuse the interruption.  
-Due to Google's efforts to maintain a “safe ads ecosystem” for its advertisers, publishers and users from fraud and bad experiences, Google has placed restrictions on our ad serving that limit our ability to provide free VPN services. 
-Regrettably, this is beyond our control.  
-To continue to enjoy ForestVPN without interruptions, please upgrade to our Premium version.''',
-  ),
+final mockLatestArticles = [
   Article(
     id: '0e8dba30-b3dc-11ec-b909-0242ac120002',
     title: 'What is Lorem Ipsum...',
