@@ -13,7 +13,6 @@ class FeaturedNewsCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         child: Stack(
           children: [
-            // Изображение с затемнением
             Positioned.fill(
               child: ColorFiltered(
                 colorFilter: ColorFilter.mode(
@@ -30,7 +29,6 @@ class FeaturedNewsCard extends StatelessWidget {
                 ),
               ),
             ),
-            // Текст
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Align(
