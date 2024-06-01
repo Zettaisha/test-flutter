@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const ForestVPNTestApp());
+  runApp(const InternLevVotintsev());
 }
 
-class ForestVPNTestApp extends StatelessWidget {
-  const ForestVPNTestApp({Key? key}) : super(key: key);
+class InternLevVotintsev extends StatelessWidget {
+  const InternLevVotintsev({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'ForestVPN test',
+      title: 'Меня возьмут, 100% (с) Лев Вотинцев',
       home: Scaffold(
         body: Center(
           child: Text('News screen'),
