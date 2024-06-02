@@ -9,11 +9,18 @@ class FetchArticles extends ArticlesEvent {
   List<Object> get props => [];
 }
 
-class MarkArticleVisited extends ArticlesEvent {
+class MarkArticleVisitedEvent extends ArticlesEvent {
   final String articleId;
 
-  const MarkArticleVisited(this.articleId);
+  const MarkArticleVisitedEvent(this.articleId);
 
   @override
   List<Object> get props => [articleId];
+}
+
+class MarkAllReadedEvent extends ArticlesEvent {
+  const MarkAllReadedEvent();
+
+  @override
+  List<Object> get props => [];
 }

@@ -36,4 +36,15 @@ class NewsRepositoryImpl implements NewsRepository {
       mockFeaturedArticles[index] = article.copyWith(readed: true);
     }
   }
+
+  @override
+  Future<void> setAllReaded() async {
+    for (var i = 0; i < mockFeaturedArticles.length; i++) {
+      mockFeaturedArticles[i] = mockFeaturedArticles[i].copyWith(readed: true);
+    }
+
+    for (var i = 0; i < mockLatestArticles.length; i++) {
+      mockLatestArticles[i] = mockLatestArticles[i].copyWith(readed: true);
+    }
+  }
 }

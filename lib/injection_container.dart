@@ -3,6 +3,7 @@ import 'package:test_flutter/data/repository/news_repository_impl.dart';
 import 'package:test_flutter/domain/repository/abstract_news_repository.dart';
 import 'package:test_flutter/domain/usecases/get_featured_articles.dart';
 import 'package:test_flutter/domain/usecases/get_latest_articles.dart';
+import 'package:test_flutter/domain/usecases/set_all_readed.dart';
 import 'package:test_flutter/domain/usecases/set_article_visited.dart';
 import 'package:test_flutter/presentation/bloc/news_bloc.dart';
 
@@ -17,5 +18,6 @@ Future<void> initializeDependencies() async {
         getLatestArticles: GetLatestArticles(sl<NewsRepository>()),
         getFeaturedArticles: GetFeaturedArticles(sl<NewsRepository>()),
         setArticleVisited: SetArticleVisited(sl<NewsRepository>()),
+        setMarkAllReaded: MarkAllReaded(sl<NewsRepository>()),
       ));
 }

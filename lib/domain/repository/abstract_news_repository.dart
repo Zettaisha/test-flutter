@@ -5,4 +5,5 @@ abstract class NewsRepository {
   Future<List<Article>> getFeaturedArticles();
   Future<Article> getArticle(String id);
   Future<void> setArticleVisited(String id);
+  Future<void> setAllReaded();
 }

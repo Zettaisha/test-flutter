@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_flutter/domain/repository/abstract_news_repository.dart';
 import 'package:test_flutter/domain/usecases/get_featured_articles.dart';
 import 'package:test_flutter/domain/usecases/get_latest_articles.dart';
+import 'package:test_flutter/domain/usecases/set_all_readed.dart';
 import 'package:test_flutter/domain/usecases/set_article_visited.dart';
 import 'package:test_flutter/presentation/bloc/news_bloc.dart';
 import 'package:test_flutter/presentation/bloc/news_events.dart';
@@ -28,6 +29,7 @@ class HomePage extends StatelessWidget {
                 GetFeaturedArticles(context.read<NewsRepository>()),
             setArticleVisited:
                 SetArticleVisited(context.read<NewsRepository>()),
+            setMarkAllReaded: MarkAllReaded(context.read<NewsRepository>()),
           )..add(FetchArticles()),
           child: const HomePageContent(),
         ),
@@ -45,13 +47,13 @@ class HomePageContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // header
-        const Stack(
+        Stack(
           children: [
-            Positioned(
+            const Positioned(
               left: 0,
               child: Icon(Icons.arrow_back_ios, color: Colors.black),
             ),
-            Center(
+            const Center(
               child: Text(
                 'Notifications',
                 style: TextStyle(color: Colors.black, fontSize: 18),
@@ -59,9 +61,13 @@ class HomePageContent extends StatelessWidget {
             ),
             Positioned(
               right: 0,
-              child: Text(
-                'Mark all read',
-                style: TextStyle(color: Colors.black, fontSize: 18),
+              child: GestureDetector(
+                child: const Text(
+                  'Mark all read',
+                  style: TextStyle(color: Colors.black, fontSize: 18),
+                ),
+                onTap: () => BlocProvider.of<ArticlesBloc>(context)
+                    .add(const MarkAllReadedEvent()),
               ),
             ),
           ],
@@ -102,7 +108,7 @@ class HomePageContent extends StatelessWidget {
                       ),
                       onTap: () {
                         BlocProvider.of<ArticlesBloc>(context)
-                            .add(MarkArticleVisited(featuredArticle.id));
+                            .add(MarkArticleVisitedEvent(featuredArticle.id));
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (ctx) =>
                                 ArticlePage(article: featuredArticle)));
@@ -149,7 +155,7 @@ class HomePageContent extends StatelessWidget {
                     ),
                     onTap: () {
                       BlocProvider.of<ArticlesBloc>(context)
-                          .add(MarkArticleVisited(latestArticle.id));
+                          .add(MarkArticleVisitedEvent(latestArticle.id));
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (ctx) =>
                               ArticlePage(article: latestArticle)));
