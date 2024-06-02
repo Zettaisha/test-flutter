@@ -38,6 +38,28 @@ class ArticlesBloc extends Bloc<ArticlesEvent, ArticlesState> {
       MarkArticleVisited event, Emitter<ArticlesState> emit) async {
     try {
       await setArticleVisited(event.articleId);
+
+      if (state is ArticlesLoaded) {
+        final currentState = state as ArticlesLoaded;
+        final latestArticles = currentState.latestArticles.map((article) {
+          if (article.id == event.articleId) {
+            return article.copyWith(readed: true);
+          }
+          return article;
+        }).toList();
+
+        final featuredArticles = currentState.featuredArticles.map((article) {
+          if (article.id == event.articleId) {
+            return article.copyWith(readed: true);
+          }
+          return article;
+        }).toList();
+
+        emit(ArticlesLoaded(
+          latestArticles: latestArticles,
+          featuredArticles: featuredArticles,
+        ));
+      }
     } catch (e) {
       emit(ArticlesError(e.toString()));
     }

@@ -127,44 +127,42 @@ class HomePageContent extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        Expanded(
-          child: BlocBuilder<ArticlesBloc, ArticlesState>(
-            builder: (context, state) {
-              if (state is ArticlesLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is ArticlesLoaded) {
-                return ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: state.latestArticles.length,
-                  itemBuilder: (context, index) {
-                    var latestArticle = state.latestArticles[index];
-                    final titleColor =
-                        latestArticle.readed ? Colors.deepPurple : Colors.black;
-                    return GestureDetector(
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 15.0),
-                        child: LatestNewsCard(
-                          article: latestArticle,
-                          color: titleColor,
-                        ),
+        Expanded(child: BlocBuilder<ArticlesBloc, ArticlesState>(
+          builder: (context, state) {
+            if (state is ArticlesLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is ArticlesLoaded) {
+              return ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: state.latestArticles.length,
+                itemBuilder: (context, index) {
+                  var latestArticle = state.latestArticles[index];
+                  final titleColor =
+                      latestArticle.readed ? Colors.deepPurple : Colors.black;
+                  return GestureDetector(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 15.0),
+                      child: LatestNewsCard(
+                        article: latestArticle,
+                        color: titleColor,
                       ),
-                      onTap: () {
-                        BlocProvider.of<ArticlesBloc>(context)
-                            .add(MarkArticleVisited(latestArticle.id));
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (ctx) =>
-                                ArticlePage(article: latestArticle)));
-                      },
-                    );
-                  },
-                );
-              } else if (state is ArticlesError) {
-                return Text('Error: ${state.message}');
-              }
-              return Container();
-            },
-          ),
-        ),
+                    ),
+                    onTap: () {
+                      BlocProvider.of<ArticlesBloc>(context)
+                          .add(MarkArticleVisited(latestArticle.id));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (ctx) =>
+                              ArticlePage(article: latestArticle)));
+                    },
+                  );
+                },
+              );
+            } else if (state is ArticlesError) {
+              return Text('Error: ${state.message}');
+            }
+            return Container();
+          },
+        )),
       ],
     );
   }
