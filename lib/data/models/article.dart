@@ -14,16 +14,4 @@ class Article {
   final String imageUrl;
   final bool readed;
   final String? description;
-
-  String getTimeAgo() {
-    final now = DateTime.now();
-    final difference = now.difference(publicationDate);
-    final daysAgo = difference.inDays;
-
-    if (daysAgo == 1) {
-      return '1 day ago';
-    } else {
-      return '$daysAgo days ago';
-    }
-  }
 }

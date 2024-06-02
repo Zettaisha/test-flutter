@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/core/extensions/to_paragraph.dart';
 import 'package:test_flutter/data/models/article.dart';
 
 class ArticlePage extends StatelessWidget {
@@ -66,7 +67,7 @@ class ArticlePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                article.description ?? 'There is no text',
+                article.description!.splitIntoParagraphs(),
                 style: const TextStyle(
                   fontSize: 16,
                 ),

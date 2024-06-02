@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter/core/extensions/datetime.dart';
 import 'package:test_flutter/data/models/article.dart';
 import 'package:test_flutter/presentation/widgets/article_page.dart';
 
@@ -54,7 +55,7 @@ class LatestNewsCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        article.getTimeAgo(),
+                        article.publicationDate.getTimeAgo(),
                         style:
                             const TextStyle(color: Colors.grey, fontSize: 12),
                       ),
