@@ -75,7 +75,6 @@ class HomePageContent extends StatelessWidget {
         const SizedBox(height: 20),
         BlocBuilder<ArticlesBloc, ArticlesState>(
           builder: (context, state) {
-            print('Current state FEATURED NEWS: $state');
             if (state is ArticlesLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is ArticlesLoaded) {
@@ -87,8 +86,6 @@ class HomePageContent extends StatelessWidget {
                   itemCount: state.featuredArticles.length,
                   itemBuilder: (context, index) {
                     var featuredArticle = state.featuredArticles[index];
-                    print(
-                        'Featured article: $featuredArticle'); // Debugging line
                     return Padding(
                       padding: const EdgeInsets.only(right: 30.0),
                       child: FeaturedNewsCard(article: featuredArticle),
@@ -99,11 +96,7 @@ class HomePageContent extends StatelessWidget {
             } else if (state is ArticlesError) {
               return Text('Error: ${state.message}');
             }
-            return Container(
-              width: 15,
-              height: 15,
-              color: Colors.red,
-            );
+            return Container();
           },
         ),
         // latest news region
@@ -119,7 +112,6 @@ class HomePageContent extends StatelessWidget {
         Expanded(
           child: BlocBuilder<ArticlesBloc, ArticlesState>(
             builder: (context, state) {
-              // print('Current state LATEST NEWS: $state'); // Debugging line
               if (state is ArticlesLoading) {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is ArticlesLoaded) {
@@ -128,7 +120,6 @@ class HomePageContent extends StatelessWidget {
                   itemCount: state.latestArticles.length,
                   itemBuilder: (context, index) {
                     var latestArticle = state.latestArticles[index];
-                    // print('Latest article: $latestArticle'); // Debugging line
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 15.0),
                       child: LatestNewsCard(article: latestArticle),
@@ -138,11 +129,7 @@ class HomePageContent extends StatelessWidget {
               } else if (state is ArticlesError) {
                 return Text('Error: ${state.message}');
               }
-              return Container(
-                width: 15,
-                height: 5,
-                color: Colors.red,
-              );
+              return Container();
             },
           ),
         ),
