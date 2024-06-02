@@ -22,5 +22,5 @@ class NewsRepositoryImpl implements NewsRepository {
     return mockFeaturedArticles;
   }
 
-  // TODO: метод, который будет переносить Article из Featured в Latest (доп. задание)
+  // TODO: метод, который будет маркать все статьи прочитанными
 }
