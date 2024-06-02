@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_flutter/domain/repository/abstract_news_repository.dart';
 import 'package:test_flutter/domain/usecases/get_featured_articles.dart';
 import 'package:test_flutter/domain/usecases/get_latest_articles.dart';
+import 'package:test_flutter/domain/usecases/set_article_visited.dart';
 import 'package:test_flutter/presentation/bloc/news_bloc.dart';
 import 'package:test_flutter/presentation/bloc/news_events.dart';
 import 'package:test_flutter/presentation/bloc/news_states.dart';
+import 'package:test_flutter/presentation/widgets/article_page.dart';
 import 'package:test_flutter/presentation/widgets/featured_news_card.dart';
 import 'package:test_flutter/presentation/widgets/latest_news_card.dart';
 
@@ -24,6 +26,8 @@ class HomePage extends StatelessWidget {
                 GetLatestArticles(context.read<NewsRepository>()),
             getFeaturedArticles:
                 GetFeaturedArticles(context.read<NewsRepository>()),
+            setArticleVisited:
+                SetArticleVisited(context.read<NewsRepository>()),
           )..add(FetchArticles()),
           child: const HomePageContent(),
         ),
@@ -86,9 +90,23 @@ class HomePageContent extends StatelessWidget {
                   itemCount: state.featuredArticles.length,
                   itemBuilder: (context, index) {
                     var featuredArticle = state.featuredArticles[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 30.0),
-                      child: FeaturedNewsCard(article: featuredArticle),
+                    final titleColor =
+                        featuredArticle.readed ? Colors.purple : Colors.white;
+                    return GestureDetector(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 30.0),
+                        child: FeaturedNewsCard(
+                          article: featuredArticle,
+                          color: titleColor,
+                        ),
+                      ),
+                      onTap: () {
+                        BlocProvider.of<ArticlesBloc>(context)
+                            .add(MarkArticleVisited(featuredArticle.id));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (ctx) =>
+                                ArticlePage(article: featuredArticle)));
+                      },
                     );
                   },
                 ),
@@ -120,9 +138,23 @@ class HomePageContent extends StatelessWidget {
                   itemCount: state.latestArticles.length,
                   itemBuilder: (context, index) {
                     var latestArticle = state.latestArticles[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 15.0),
-                      child: LatestNewsCard(article: latestArticle),
+                    final titleColor =
+                        latestArticle.readed ? Colors.deepPurple : Colors.black;
+                    return GestureDetector(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 15.0),
+                        child: LatestNewsCard(
+                          article: latestArticle,
+                          color: titleColor,
+                        ),
+                      ),
+                      onTap: () {
+                        BlocProvider.of<ArticlesBloc>(context)
+                            .add(MarkArticleVisited(latestArticle.id));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (ctx) =>
+                                ArticlePage(article: latestArticle)));
+                      },
                     );
                   },
                 );

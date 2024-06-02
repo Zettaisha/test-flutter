@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-// События
 abstract class ArticlesEvent extends Equatable {
   const ArticlesEvent();
 }
@@ -8,4 +7,13 @@ abstract class ArticlesEvent extends Equatable {
 class FetchArticles extends ArticlesEvent {
   @override
   List<Object> get props => [];
+}
+
+class MarkArticleVisited extends ArticlesEvent {
+  final String articleId;
+
+  const MarkArticleVisited(this.articleId);
+
+  @override
+  List<Object> get props => [articleId];
 }

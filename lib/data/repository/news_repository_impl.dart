@@ -22,5 +22,18 @@ class NewsRepositoryImpl implements NewsRepository {
     return mockFeaturedArticles;
   }
 
-  // TODO: метод, который будет маркать все статьи прочитанными
+  @override
+  Future<void> setArticleVisited(String id) async {
+    var article = mockLatestArticles.firstWhere(
+      (e) => e.id == id,
+      orElse: () => mockFeaturedArticles.firstWhere((e) => e.id == id),
+    );
+    if (mockLatestArticles.contains(article)) {
+      int index = mockLatestArticles.indexOf(article);
+      mockLatestArticles[index] = article.copyWith(readed: true);
+    } else {
+      int index = mockFeaturedArticles.indexOf(article);
+      mockFeaturedArticles[index] = article.copyWith(readed: true);
+    }
+  }
 }
