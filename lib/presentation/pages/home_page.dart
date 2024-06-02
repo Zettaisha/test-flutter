@@ -11,6 +11,7 @@ import 'package:test_flutter/presentation/bloc/news_states.dart';
 import 'package:test_flutter/presentation/widgets/article_page.dart';
 import 'package:test_flutter/presentation/widgets/featured_news_card.dart';
 import 'package:test_flutter/presentation/widgets/latest_news_card.dart';
+import 'package:flutter_svg/svg.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -49,9 +50,14 @@ class HomePageContent extends StatelessWidget {
         // header
         Stack(
           children: [
-            const Positioned(
+            Positioned(
               left: 0,
-              child: Icon(Icons.arrow_back_ios, color: Colors.black),
+              child: SvgPicture.asset(
+                'assets/icons/back_arrow.svg',
+                height: 24,
+                width: 9,
+                fit: BoxFit.scaleDown,
+              ),
             ),
             const Center(
               child: Text(

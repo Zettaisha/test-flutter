@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:test_flutter/core/extensions/to_paragraph.dart';
 import 'package:test_flutter/data/models/article.dart';
 
@@ -39,8 +40,14 @@ class ArticlePage extends StatelessWidget {
                       top: 60,
                       left: 20,
                       child: IconButton(
-                        icon: const Icon(Icons.arrow_back_ios,
-                            color: Colors.white),
+                        icon: SvgPicture.asset(
+                          'assets/icons/back_arrow.svg',
+                          height: 24,
+                          width: 9,
+                          fit: BoxFit.scaleDown,
+                          colorFilter: const ColorFilter.mode(
+                              Colors.white, BlendMode.srcIn),
+                        ),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
